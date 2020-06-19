@@ -11,21 +11,6 @@ const GithubInfo = ({
   bio,
   repo
 }) => (
-  // <div className="card">
-  //   {profilePic ? (
-  //     <img src={profilePic} alt="ProfilePic" style={{ width: "100%" }} />
-  //   ) : null}
-  //   {name ? <h1>{name}</h1> : null}
-  //   {username ? <p className="title">{username}</p> : null}
-  //   {bio ? <p>{bio}</p> : null}
-  //   {followers ? <p>Followers: {followers}</p> : <p>Followers: 0</p>}
-  //   {following ? <p>Following: {following}</p> : <p>Following: 0</p>}
-  //   <p>
-  //     <a className="visit" href={url}>
-  //       Visit
-  //     </a>
-  //   </p>
-  // </div>
   <div className="frame">
     <div className="center">
       <div className="profile">
@@ -35,8 +20,10 @@ const GithubInfo = ({
           <img src={profilePic} style={{width:70, height:70}}  alt="Jessica Potter" />
         </div>
 
-        <div className="name">{name}</div>
-        <div className="job">{username}</div>
+        <div className="name"><strong>{name}</strong></div>
+        <div className="job"><strong>{username}</strong></div>
+        <br />
+        <div className="job"><strong>{bio}</strong></div>
 
         <div className="actions">
           {/* <button className="btn">Follow</button> */}
@@ -47,15 +34,15 @@ const GithubInfo = ({
       <div className="stats">
         <div className="box">
           <span className="value">{followers}</span>
-          <span className="parameter">Followers</span>
+          <span className="parameter"><strong>Followers</strong></span>
         </div>
         <div className="box">
           <span className="value">{following}</span>
-          <span className="parameter">Following</span>
+          <span className="parameter"><strong>Following</strong></span>
         </div>
         <div className="box">
           <span className="value">{repo}</span>
-          <span className="parameter">Respository</span>
+          <span className="parameter"><strong>Respository</strong></span>
         </div>
       </div>
     </div>
