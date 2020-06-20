@@ -27,7 +27,7 @@ const GithubInfo = ({
 
         <div className="actions">
           {/* <button className="btn">Follow</button> */}
-          <a className="btn" href={url}>Visit</a>
+          <a className="btn" href={url} target="_blank" rel="noopener noreferrer">Visit</a>
         </div>
       </div>
 

@@ -9,6 +9,6 @@
     "default_popup": "index.html",
     "default_title": "Open the popup"
   },
-  "content_security_policy": "script-src 'self' 'sha256-+jh3+aAOMRKwuT2NGN21pVizPyWGdRyp6wd4zy8zE68='; object-src 'self'",
+  "content_security_policy": "script-src 'self' 'sha256-y2vJElKfP67voDosT++9EXK4qZcGbJCLN9jEE2yhjVw='; object-src 'self'",
   "permissions": []
 }

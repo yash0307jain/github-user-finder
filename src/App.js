@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import "./App.css";
 
+import Loader from "react-loader-spinner";
 import GithubInfo from "./github-info/github-info.component";
 
 class App extends React.Component {
@@ -11,14 +12,16 @@ class App extends React.Component {
     this.state = {
       username: "",
       exist: null,
+      error: null,
       name: null,
+      loginUsername: null,
       profilePic: null,
       followers: null,
       following: null,
       url: null,
       bio: null,
       repo: null,
-      error: null,
+      loading: false,
     };
   }
 
@@ -30,32 +33,34 @@ class App extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    this.setState({ exist: null, loading: true });
 
     const { username } = this.state;
-    try {
+
+    setTimeout(() => {
       axios
-      .get(`https://api.github.com/users/${username}`)
-      .then((res) => {
-        console.log(res.data);
-        this.setState({
-          exist: true,
-          error: null,
-          name: res.data.name,
-          profilePic: res.data.avatar_url,
-          followers: res.data.followers,
-          following: res.data.following,
-          url: res.data.html_url,
-          bio: res.data.bio,
-          repo: res.data.public_repos,
+        .get(`https://api.github.com/users/${username}`)
+        .then((res) => {
+          this.setState({
+            exist: true,
+            error: null,
+            name: res.data.name,
+            loginUsername: res.data.login,
+            profilePic: res.data.avatar_url,
+            followers: res.data.followers,
+            following: res.data.following,
+            url: res.data.html_url,
+            bio: res.data.bio,
+            repo: res.data.public_repos,
+            loading: false,
+          });
+
+          console.log(this.state.url)
+        })
+        .catch((err) => {
+          this.setState({ exist: null, error: true, loading: false });
         });
-      })
-      .catch((err) => {
-        this.setState({ exist: null, error: true });
-      });
-    }
-    catch(err) {
-      this.setState({ exist: null, error: true });
-    }
+    }, 500);
   };
 
   render() {
@@ -74,7 +79,7 @@ class App extends React.Component {
         {this.state.exist ? (
           <GithubInfo
             name={this.state.name}
-            username={this.state.username}
+            username={this.state.loginUsername}
             profilePic={this.state.profilePic}
             followers={this.state.followers}
             following={this.state.following}
@@ -83,8 +88,22 @@ class App extends React.Component {
             repo={this.state.repo}
           />
         ) : null}
+        {this.state.loading ? (
+          <div className="loader-oval">
+            <Loader
+              type="Oval"
+              color="#00BFFF"
+              height={100}
+              width={100}
+              timeout={3000}
+            />
+          </div>
+        ) : null}
+
         {this.state.error ? (
-          <p>User with <strong>{this.state.username}</strong> does not exist!</p>
+          <p>
+            User with <strong>{this.state.username}</strong> does not exist!
+          </p>
         ) : null}
       </div>
     );
