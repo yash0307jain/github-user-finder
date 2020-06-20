@@ -64,6 +64,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <h3 className="light heading">Github User Finder</h3>
         <form onSubmit={this.handleSubmit}>
           <div className="container">
             <input
