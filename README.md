@@ -1,3 +1,11 @@
+## Screenshots
+
+![alt text](https://raw.githubusercontent.com/yash0307jain/github-user-finder/master/src/assets/Github_User_Finder_init.png)
+
+![alt text](https://raw.githubusercontent.com/yash0307jain/github-user-finder/master/src/assets/Github_User_Finder_user_exist.png)
+
+![alt text](https://raw.githubusercontent.com/yash0307jain/github-user-finder/master/src/assets/Github_User_Finder_user_not_exist.png)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
