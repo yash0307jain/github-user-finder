@@ -39,27 +39,26 @@ class App extends React.Component {
 
     setTimeout(() => {
       axios
-      .get(`https://api.github.com/users/${username}`)
-      .then((res) => {
-        this.setState({
-          exist: true,
-          error: null,
-          name: res.data.name,
-          loginUsername: res.data.login,
-          profilePic: res.data.avatar_url,
-          followers: res.data.followers,
-          following: res.data.following,
-          url: res.data.html_url,
-          bio: res.data.bio,
-          repo: res.data.public_repos,
-          loading: false,
+        .get(`https://api.github.com/users/${username}`)
+        .then((res) => {
+          this.setState({
+            exist: true,
+            error: null,
+            name: res.data.name,
+            loginUsername: res.data.login,
+            profilePic: res.data.avatar_url,
+            followers: res.data.followers,
+            following: res.data.following,
+            url: res.data.html_url,
+            bio: res.data.bio,
+            repo: res.data.public_repos,
+            loading: false,
+          });
+        })
+        .catch((err) => {
+          this.setState({ exist: null, error: true, loading: false });
         });
-      })
-      .catch((err) => {
-        this.setState({ exist: null, error: true, loading: false });
-      });
-    }, 500)
-    
+    }, 500);
   };
 
   render() {
@@ -92,17 +91,14 @@ class App extends React.Component {
         ) : null}
         {this.state.loading ? (
           <div className="loader-oval">
-            <Loader
-              type="Grid"
-              color="#CA7C4E"
-              timeout={3000}
-            />
+            <Loader type="Grid" color="#CA7C4E" timeout={3000} />
           </div>
         ) : null}
-
         {this.state.error ? (
-          <p>
-            User with <strong>{this.state.username}</strong> does not exist!
+          <p className="loader-oval" style={{ color: "white" }}>
+            <h2>User with</h2>
+            <p className="light">{this.state.username}</p>{" "}
+            <h2>does not exist!</h2>
           </p>
         ) : null}
       </div>
