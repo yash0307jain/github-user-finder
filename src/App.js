@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import "./App.css";
+import "./App.scss";
 
 import Loader from "react-loader-spinner";
 import GithubInfo from "./github-info/github-info.component";
@@ -39,42 +39,44 @@ class App extends React.Component {
 
     setTimeout(() => {
       axios
-        .get(`https://api.github.com/users/${username}`)
-        .then((res) => {
-          this.setState({
-            exist: true,
-            error: null,
-            name: res.data.name,
-            loginUsername: res.data.login,
-            profilePic: res.data.avatar_url,
-            followers: res.data.followers,
-            following: res.data.following,
-            url: res.data.html_url,
-            bio: res.data.bio,
-            repo: res.data.public_repos,
-            loading: false,
-          });
-
-          console.log(this.state.url)
-        })
-        .catch((err) => {
-          this.setState({ exist: null, error: true, loading: false });
+      .get(`https://api.github.com/users/${username}`)
+      .then((res) => {
+        this.setState({
+          exist: true,
+          error: null,
+          name: res.data.name,
+          loginUsername: res.data.login,
+          profilePic: res.data.avatar_url,
+          followers: res.data.followers,
+          following: res.data.following,
+          url: res.data.html_url,
+          bio: res.data.bio,
+          repo: res.data.public_repos,
+          loading: false,
         });
-    }, 500);
+      })
+      .catch((err) => {
+        this.setState({ exist: null, error: true, loading: false });
+      });
+    }, 500)
+    
   };
 
   render() {
     return (
       <div className="App">
         <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            name="username"
-            value={this.state.username}
-            onChange={this.handleChange}
-            required
-          />
-          <button type="submit">Search</button>
+          <div className="container">
+            <input
+              type="text"
+              name="username"
+              value={this.state.username}
+              onChange={this.handleChange}
+              required
+              placeholder="Enter Username"
+            />
+            <div className="search"></div>
+          </div>
         </form>
         {this.state.exist ? (
           <GithubInfo
@@ -91,10 +93,8 @@ class App extends React.Component {
         {this.state.loading ? (
           <div className="loader-oval">
             <Loader
-              type="Oval"
-              color="#00BFFF"
-              height={100}
-              width={100}
+              type="Grid"
+              color="#CA7C4E"
               timeout={3000}
             />
           </div>
